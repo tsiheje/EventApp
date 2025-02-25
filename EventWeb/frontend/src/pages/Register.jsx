@@ -274,7 +274,7 @@ const Register = () => {
             <h1 className="text-5xl font-bold mb-6">Créer un compte</h1>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 px-16">
             <Select 
               options={options} 
               onChange={(option) => {

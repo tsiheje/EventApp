@@ -74,28 +74,48 @@ const Header = () => {
                 <Search className="absolute left-3 top-2.5 text-gray-400 h-5 w-5" />
             </div>
             <div className="flex items-center gap-6 text-white">
-                <Link to='/' className="hover:text-gray-300 transition-colors">
+                <NavLink to='/'
+                    className={({ isActive }) => 
+                        isActive ? "hover:text-gray-300 transition-colors border-b-2 border-white" : "hover:text-gray-300 transition-colors"
+                       }
+                >
                     Accueil
-                </Link>
+                </NavLink>
                 <NavLink to='/Evenement'
                   className={({ isActive }) => 
                     isActive ? "hover:text-gray-300 transition-colors border-b-2 border-white" : "hover:text-gray-300 transition-colors"
-                }
+                   }
                 >
                     Événements
                 </NavLink>
-                <Link to='/Prestataire' className="hover:text-gray-300 transition-colors">
+                <NavLink to='/Prestataire'
+                    className={({ isActive }) => 
+                        isActive ? "hover:text-gray-300 transition-colors border-b-2 border-white" : "hover:text-gray-300 transition-colors"
+                       }
+                >
                     Prestataires
-                </Link>
-                <Link to='/Service' className="hover:text-gray-300 transition-colors">
+                </NavLink>
+                <NavLink to='/Service' 
+                    className={({ isActive }) => 
+                    isActive ? "hover:text-gray-300 transition-colors border-b-2 border-white" : "hover:text-gray-300 transition-colors"
+                   }
+                >
                     Services
-                </Link>
-                <Link to='/Billets' className="hover:text-gray-300 transition-colors">
+                </NavLink>
+                <NavLink to='/Billets'
+                    className={({ isActive }) => 
+                        isActive ? "hover:text-gray-300 transition-colors border-b-2 border-white" : "hover:text-gray-300 transition-colors"
+                   }
+                >
                     Billets
-                </Link>
-                <Link to='/Contacts' className="hover:text-gray-300 transition-colors">
+                </NavLink>
+                <NavLink to='/Contacts' 
+                    className={({ isActive }) => 
+                        isActive ? "hover:text-gray-300 transition-colors border-b-2 border-white" : "hover:text-gray-300 transition-colors"
+                       }
+                >
                     Contacts
-                </Link>
+                </NavLink>
             </div>
             <div className="relative" ref={dropdownRef}>
                 <button 

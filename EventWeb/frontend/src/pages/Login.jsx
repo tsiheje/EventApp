@@ -76,7 +76,7 @@ const Login = () => {
                         <div className="text-center mb-8">
                             <h1 className="text-5xl font-bold mb-6">Se connecter</h1>
                         </div>
-                        <div className="space-y-4">
+                        <div className="space-y-5 px-16">
                             <div>
                                 <label className="block mb-1">Email</label>
                                 <input
@@ -89,7 +89,7 @@ const Login = () => {
                                 />
                                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                             </div>
-                            <div>
+                            <div className="">
                                 <label className="block mb-1">Mot de passe</label>
                                 <input
                                     type="password"

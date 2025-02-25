@@ -39,11 +39,9 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!validateForm()) {
             return; 
         }
-
         setLoading(true);
         try {
             const response = await UserService.login(formData);
@@ -51,7 +49,6 @@ const Login = () => {
             localStorage.setItem("nom", response.nom);
             localStorage.setItem("type", response.type);
             toast.success("Connexion réussie");
-
             const from = location.state?.from || "/";
             navigation(from, { replace: true });
         } catch (error) {
@@ -100,6 +97,13 @@ const Login = () => {
                                     onChange={handleChange}
                                 />
                                 {errors.motDePasse && <p className="text-red-500 text-sm">{errors.motDePasse}</p>}
+                            </div>
+                            <div className="flex justify-between">
+                                <div className="flex items-center gap-2">
+                                    <input type="checkbox" name="" id="" className="w-5 h-4"/>
+                                    <p>Se souvenir de moi</p>
+                                </div>
+                                <Link className="text-blue-500">Mot de passe oublier?</Link>
                             </div>
                             <button
                                 type="submit"

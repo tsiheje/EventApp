@@ -129,7 +129,7 @@ const Header = () => {
                             </div>
                         </>
                     ) : (
-                        <User className="h-8 w-8" />
+                        <User className="h-6 w-6 border-2 rounded-full bg-white text-gray-500" />
                     )}
                     {showDropdown ? (
                         <ChevronUp className="h-8 w-8"/>
@@ -183,6 +183,7 @@ const Header = () => {
                             <div className="flex flex-col p-2 gap-2">
                                 <Link 
                                     to="/register"
+                                    state={{from: location.pathname}}
                                     className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded flex items-center gap-2"
                                 >
                                     <UserPlus className="w-5 h-5" />

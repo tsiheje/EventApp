@@ -1,41 +1,86 @@
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Select from 'react-select';
+import UserService from "../services/api/UserService";
+import { toast } from "react-toastify";
 
 const OrganisateurForm = () => {
+  const [formData, setFormData] = useState({
+    type:'Organisateur',
+    nom:'',
+    email:'',
+    telephone:'',
+    motDePasse:'',
+  })
+
+  const navigation = useNavigate();
+  const location = useLocation();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    try{
+      const response = await UserService.register(formData);
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("nom", response.nom);
+      localStorage.setItem("type", response.type);
+      toast.success("Connexion réussie");
+      const from = location.state?.from || "/";
+      navigation(from, { replace: true });
+    }catch(error){
+      console.error(error);
+      toast.error("Erreur lors de la connexion");
+    }
+  }
+
   return (
-    <form className="space-y-3">
+    <form className="space-y-3" onSubmit={handleSubmit}>
       <div>
         <label className="block">Nom</label>
         <input 
-          type="text" 
+          type="text"
+          name="nom"
           className="w-full p-2 border rounded" 
           placeholder="Entrez votre nom"
+          onChange={handleChange}
         />
-      </div>
+      </div>  
       <div>
         <label className="block">Email</label>
         <input 
           type="email" 
+          name="email"
           className="w-full p-2 border rounded" 
           placeholder="Entrez votre email"
+          onChange={handleChange}
         />
       </div>
       <div>
         <label className="block">Téléphone</label>
         <input 
           type="text" 
+          name="telephone"
           className="w-full p-2 border rounded" 
           placeholder="Entrez votre téléphone"
+          onChange={handleChange}
         />
       </div>
       <div>
         <label className="block">Mot de passe</label>
         <input 
           type="password" 
+          name="motDePasse"
           className="w-full p-2 border rounded" 
           placeholder="Créez un mot de passe"
+          onChange={handleChange}
         />
       </div>
       <button 
@@ -76,18 +121,22 @@ const PrestataireForm = () => {
     const renderStep1 = () => (
       <>
         <div className="space-y-4">
-          <div>
+        <div>
             <label className="block mb-1">Profil du prestataire</label>
             <div className="flex flex-col items-center space-y-4">
-              <div className="w-96 h-32 border-2 border-dashed border-gray-300 flex items-center justify-center overflow-hidden">
+              <label 
+                htmlFor="profile-image" 
+                className="w-full h-32 border-2 border-dashed border-gray-300 flex items-center justify-center overflow-hidden cursor-pointer hover:border-blue-500 transition-colors"
+              >
                 {imagePreview ? (
                   <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
                   <div className="text-gray-400 text-center">
-                    <p>Cliquez pour ajouter une photo</p>
+                    <p>Cliquez ici pour ajouter une photo</p>
+                    <p className="text-sm mt-1">ou glissez une image</p>
                   </div>
                 )}
-              </div>
+              </label>
               <input
                 type="file"
                 accept="image/*"
@@ -95,12 +144,6 @@ const PrestataireForm = () => {
                 className="hidden"
                 id="profile-image"
               />
-              <label
-                htmlFor="profile-image"
-                className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-              >
-                Choisir une photo
-              </label>
             </div>
           </div>
           <div>
@@ -213,17 +256,25 @@ const PrestataireForm = () => {
   
     return (
       <form className="space-y-4">
-        <div className="flex justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 relative">
           {[1, 2, 3].map((num) => (
             <div
               key={num}
-              className={`w-8 h-8 rounded-full flex items-center justify-center ${
+              className={`w-8 h-8 rounded-full flex items-center justify-center z-10 ${
                 step >= num ? 'bg-blue-500 text-white' : 'bg-gray-200'
               }`}
             >
               {num}
             </div>
           ))}
+          <div className="absolute h-1 bg-gray-200 w-full top-4 -z-0"></div>
+          <div 
+            className="absolute h-1 bg-blue-500 top-4 -z-0 transition-all duration-300"
+            style={{ 
+              width: step === 1 ? '0%' : step === 2 ? '50%' : '100%',
+              left: 0
+            }}
+          ></div>
         </div>
         {step === 1 && renderStep1()}
         {step === 2 && renderStep2()}
@@ -282,7 +333,7 @@ const Register = () => {
                 setShowForm(false);
               }}
               placeholder="Sélectionnez votre profil"
-              className="mb-5"
+              className="mb-5 z-20"
               value={selected}
             />
             {!showForm && (

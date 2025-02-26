@@ -1,8 +1,8 @@
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import UserService from "../services/api/UserService";
 import { toast } from "react-toastify";
+import useAuthStore from "../store";
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -11,22 +11,26 @@ const Login = () => {
     });
 
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false);
-
-    const navigation = useNavigate();
+    
+    const { login, isLoading } = useAuthStore();
+    
+    const navigate = useNavigate();
     const location = useLocation();
 
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value,
+        }));
 
-        setErrors({ ...errors, [e.target.name]: "" });
+        if (errors[name]) {
+            setErrors(prev => ({ ...prev, [name]: "" }));
+        }
     };
 
     const validateForm = () => {
-        let newErrors = {};
+        const newErrors = {};
         if (!formData.email.trim()) {
             newErrors.email = "L'email est requis.";
         }
@@ -42,20 +46,16 @@ const Login = () => {
         if (!validateForm()) {
             return; 
         }
-        setLoading(true);
+        
         try {
-            const response = await UserService.login(formData);
-            localStorage.setItem("token", response.token);
-            localStorage.setItem("nom", response.nom);
-            localStorage.setItem("type", response.type);
+            await login(formData);
             toast.success("Connexion réussie");
+            
             const from = location.state?.from || "/";
-            navigation(from, { replace: true });
+            navigate(from, { replace: true });
         } catch (error) {
             console.error(error);
             toast.error("Erreur lors de la connexion");
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -73,10 +73,11 @@ const Login = () => {
                         <div className="text-center mb-8">
                             <h1 className="text-5xl font-bold mb-6">Se connecter</h1>
                         </div>
-                        <div className="space-y-5 px-16">
+                        <form onSubmit={handleSubmit} className="space-y-5 px-16">
                             <div>
-                                <label className="block mb-1">Email</label>
+                                <label htmlFor="email" className="block mb-1">Email</label>
                                 <input
+                                    id="email"
                                     type="email"
                                     name="email"
                                     value={formData.email}
@@ -86,9 +87,10 @@ const Login = () => {
                                 />
                                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                             </div>
-                            <div className="">
-                                <label className="block mb-1">Mot de passe</label>
+                            <div>
+                                <label htmlFor="motDePasse" className="block mb-1">Mot de passe</label>
                                 <input
+                                    id="motDePasse"
                                     type="password"
                                     name="motDePasse"
                                     value={formData.motDePasse}
@@ -100,18 +102,17 @@ const Login = () => {
                             </div>
                             <div className="flex justify-between">
                                 <div className="flex items-center gap-2">
-                                    <input type="checkbox" name="" id="" className="w-5 h-4"/>
-                                    <p>Se souvenir de moi</p>
+                                    <input type="checkbox" id="remember" className="w-5 h-4"/>
+                                    <label htmlFor="remember">Se souvenir de moi</label>
                                 </div>
-                                <Link className="text-blue-500">Mot de passe oublier?</Link>
+                                <Link to="/forgot-password" className="text-blue-500">Mot de passe oublié?</Link>
                             </div>
                             <button
                                 type="submit"
                                 className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
-                                onClick={handleSubmit}
-                                disabled={loading}
+                                disabled={isLoading}
                             >
-                                {loading ? "Connexion..." : "Se connecter"}
+                                {isLoading ? "Connexion..." : "Se connecter"}
                             </button>
                             <div>
                                 <p>
@@ -119,7 +120,7 @@ const Login = () => {
                                     <Link to='/register' className="text-blue-500">Créer un compte</Link>
                                 </p>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div className="w-1/2 bg-blue-50 flex items-center justify-center">

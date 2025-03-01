@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import MotDePasse from './pages/MotDePasse';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
+        <Route path='/MotDePasse' element={<MotDePasse/>}/>
         <Route element={<Layout />}>
           {routes.map(({ path, Element }) => (
             <Route key={path} path={path} element={<Element />} />

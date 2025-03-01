@@ -3,8 +3,6 @@ import Evenement from "../pages/Evenement";
 import Prestataire from "../pages/Prestataire";
 import Service from "../pages/service";
 import Billets from "../pages/Billets";
-import Profil from "../pages/Profil";
-import Dashboard from "../pages/Dashboard";
 import Contact from "../pages/Contact";
 
 const routes = [
@@ -37,7 +35,7 @@ const routes = [
         path: "/contacts",
         name: "Contacts",
         Element: Contact
-    }
+    },
 ];
 
 export default routes;

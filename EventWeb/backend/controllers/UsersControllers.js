@@ -2,12 +2,21 @@ const { Op } = require("sequelize");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const db = require("../models/init-models");
+const configureMulter = require("../middlewares/multerconfig");
+
+const profileUpload = configureMulter('uploads/profiles', {
+  allowedTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+  maxSize: 5 * 1024 * 1024
+});
 
 const UserController = {
+    uploadProfileImage: profileUpload.single('profil'),
+    
     register: async function (req, res) {
         try {
-            const {nom, email, telephone, motDePasse, type, specialite, tarifhoraire, disponipibilite,  profil} = req.body;
-
+            const {nom, email, telephone, motDePasse, type, specialite, localisation, tarifhoraire, disponipibilite} = req.body;
+            const profil = req.file ? req.file.path : null;
+            console.log(profil)
             if (!nom || !email || !telephone || !motDePasse || !type) {
                 return res.status(400).json({
                     error: "Tous les champs sont obligatoires"
@@ -40,9 +49,10 @@ const UserController = {
                 type
             });
 
+            
             switch (type) {
                 case 'Prestataire':
-                    if (!specialite || !tarifhoraire || !disponipibilite || !profil) {
+                    if (!specialite || !tarifhoraire || !localisation) {
                         await user.destroy();
                         return res.status(400).json({
                             error: "Les informations du prestataire sont incomplètes"
@@ -53,14 +63,15 @@ const UserController = {
                         userId: user.id,
                         specialite,
                         tarifhoraire,
+                        localisation,
                         disponipibilite,
-                        profil
+                        profil: profil 
                     });
                     break;
 
                 case 'Organisateur':
                     await db.organisateur.create({
-                        userId: user.id
+                        userId: user.id,
                     });
                     break;
             }
@@ -104,6 +115,7 @@ const UserController = {
             });
         }
     },
+
     login: async function (req, res) {
         try {
             const { email, motDePasse } = req.body;
@@ -170,8 +182,59 @@ const UserController = {
                 error: "Une erreur est survenue lors de la connexion"
             });
         }
-    }
+    },
     
+    updateProfileImage: async function (req, res) {
+        try {
+            const userId = req.params.userId;
+            
+            if (!req.file) {
+                return res.status(400).json({
+                    error: "Aucune image de profil fournie"
+                });
+            }
+
+            const user = await db.utilisateurs.findByPk(userId);
+            
+            if (!user) {
+                return res.status(404).json({
+                    error: "Utilisateur non trouvé"
+                });
+            }
+
+            const profilePath = req.file.path;
+            
+            if (user.type === 'Prestataire') {
+                const prestataire = await db.prestataire.findOne({
+                    where: { userId }
+                });
+                
+                if (prestataire) {
+                    await prestataire.update({ profil: profilePath });
+                }
+            } else if (user.type === 'Organisateur') {
+                const organisateur = await db.organisateur.findOne({
+                    where: { userId }
+                });
+                
+                if (organisateur) {
+                    await organisateur.update({ profil: profilePath });
+                }
+            }
+
+            res.json({
+                success: true,
+                message: "Image de profil mise à jour avec succès",
+                profilePath
+            });
+            
+        } catch (error) {
+            console.error("Erreur lors de la mise à jour de l'image de profil:", error);
+            res.status(500).json({
+                error: "Une erreur est survenue lors de la mise à jour de l'image de profil"
+            });
+        }
+    }
 };
 
 module.exports = UserController;

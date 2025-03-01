@@ -3,9 +3,10 @@ import { Search, User, LogIn, LogOut, ChevronDown, ChevronUp, LayoutDashboard, C
 import { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 import useAuthStore from "../../store";
+import Swal from 'sweetalert2';
 
 const Header = () => {
-    const { token, nom, type, isAuthenticated, logout } = useAuthStore();
+    const {nom, type, isAuthenticated, logout } = useAuthStore();
     const [showDropdown, setShowDropdown] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [userInitial, setUserInitial] = useState("");
@@ -110,7 +111,7 @@ const Header = () => {
                 </div>
                 <div className="relative ml-2" ref={dropdownRef}>
                     <button 
-                        className="text-white transition-colors flex items-center gap-1 w-20 h-12 border-2 rounded-full px-2"
+                        className="text-white transition-colors flex items-center gap-1 w-16 h-10 border-2 rounded-full px-1"
                         onClick={() => setShowDropdown(!showDropdown)}
                     >
                         {isAuthenticated ? (
@@ -123,13 +124,13 @@ const Header = () => {
                             <User className="h-6 w-6 border-2 rounded-full bg-white text-gray-500" />
                         )}
                         {showDropdown ? (
-                            <ChevronUp className="h-8 w-8"/>
+                            <ChevronUp className="h-7 w-7"/>
                         ) : (
-                            <ChevronDown className="h-8 w-8"/>
+                            <ChevronDown className="h-7 w-7"/>
                         )}
                     </button>
                     {showDropdown && (
-                        <div className="absolute right-0 top-16 w-64 bg-white shadow-lg z-50 rounded">
+                        <div className="absolute right-0 top-14 w-64 bg-white shadow-lg z-50 rounded">
                             {isAuthenticated ? (
                                 <>
                                     <Link to="/profil" className="flex items-center gap-3 p-3 border-b hover:bg-gray-100">

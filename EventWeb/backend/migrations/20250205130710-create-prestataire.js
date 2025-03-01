@@ -18,7 +18,13 @@ module.exports = {
       tarifhoraire: {
         type: Sequelize.FLOAT
       },
+      localisation: {
+        type: Sequelize.STRING
+      },
       disponipibilite: {
+        type: Sequelize.STRING
+      },
+      profil: {
         type: Sequelize.STRING
       },
       createdAt: {

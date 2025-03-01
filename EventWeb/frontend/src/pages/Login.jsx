@@ -1,5 +1,5 @@
-import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { ArrowLeft, EyeIcon, EyeOffIcon } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuthStore from "../store";
@@ -9,6 +9,8 @@ const Login = () => {
         email: '',
         motDePasse: ''
     });
+
+    const [showPassword, setShowPassword] = useState(false)
 
     const [errors, setErrors] = useState({});
     
@@ -87,17 +89,27 @@ const Login = () => {
                                 />
                                 {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                             </div>
-                            <div>
+                            <div className="relative w-full">
                                 <label htmlFor="motDePasse" className="block mb-1">Mot de passe</label>
-                                <input
-                                    id="motDePasse"
-                                    type="password"
-                                    name="motDePasse"
-                                    value={formData.motDePasse}
-                                    className={`w-full p-2 border rounded ${errors.motDePasse ? "border-red-500" : "border-gray-300"}`}
-                                    placeholder="Entrez votre mot de passe"
-                                    onChange={handleChange}
-                                />
+                                <div className="relative">
+                                    <input
+                                        id="motDePasse"
+                                        type={showPassword ? "text" : "password"}
+                                        name="motDePasse"
+                                        value={formData.motDePasse}
+                                        className={`w-full p-2 pr-10 border rounded ${errors.motDePasse ? "border-red-500" : "border-gray-300"}`}
+                                        placeholder="Entrez votre mot de passe"
+                                        onChange={handleChange}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="absolute inset-y-0 right-2 flex items-center text-gray-500"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        aria-label="Afficher/Masquer le mot de passe"
+                                    >
+                                        {showPassword ? <EyeOffIcon size={25} /> : <EyeIcon size={25} />}
+                                    </button>
+                                </div>
                                 {errors.motDePasse && <p className="text-red-500 text-sm">{errors.motDePasse}</p>}
                             </div>
                             <div className="flex justify-between">
@@ -105,7 +117,7 @@ const Login = () => {
                                     <input type="checkbox" id="remember" className="w-5 h-4"/>
                                     <label htmlFor="remember">Se souvenir de moi</label>
                                 </div>
-                                <Link to="/forgot-password" className="text-blue-500">Mot de passe oublié?</Link>
+                                <Link to="/MotDePasse" className="text-blue-500">Mot de passe oublié?</Link>
                             </div>
                             <button
                                 type="submit"

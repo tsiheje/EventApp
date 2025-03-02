@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ArrowLeft, EyeIcon, EyeOffIcon } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import useAuthStore from "../store";
+import useAuthStore from "../../store";
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -57,7 +57,11 @@ const Login = () => {
             navigate(from, { replace: true });
         } catch (error) {
             console.error(error);
-            toast.error("Erreur lors de la connexion");
+            if (error.response && error.response.data && error.response.data.error) {
+                toast.error(error.response.data.error);
+            } else {
+                toast.error("Erreur lors de la connexion");
+            }
         }
     };
 
@@ -138,7 +142,9 @@ const Login = () => {
                 <div className="w-1/2 bg-blue-50 flex items-center justify-center">
                     <div className="text-center">
                         <h2 className="text-3xl font-bold mb-4">Bienvenue!</h2>
-                        <p className="text-gray-600">Nous sommes ravis de vous accueillir sur notre plateforme.</p>
+                        <p className="text-gray-600">
+                            Créez, gérez et profitez de vos événements en toute simplicité ! Notre plateforme facilite l'organisation, la vente de billets et l'expérience des participants.
+                        </p>
                     </div>
                 </div>
             </div>

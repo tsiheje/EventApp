@@ -2,11 +2,11 @@ import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import routes from './routes/routes';
 import Layout from './components/Layout';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import MotDePasse from './pages/MotDePasse';
+import MotDePasse from './pages/Home/Landing';
 
 function App() {
   return (

@@ -1,9 +1,9 @@
-import Landing from "../pages/Landing";
-import Evenement from "../pages/Evenement";
-import Prestataire from "../pages/Prestataire";
-import Service from "../pages/service";
-import Billets from "../pages/Billets";
-import Contact from "../pages/Contact";
+import Landing from "../pages/Home/Landing";
+import Evenement from "../pages/Evenement/Evenement";
+import Prestataire from "../pages/Prestataire/Prestataire";
+import Service from "../pages/Service/service";
+import Billets from "../pages/Billets/Billets";
+import Contact from "../pages/Contact/Contact";
 
 const routes = [
     {

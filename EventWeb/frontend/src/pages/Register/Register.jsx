@@ -83,7 +83,7 @@ const OrganisateurForm = () => {
   };
 
   return (
-    <form className="space-y-4" onSubmit={handleSubmit}>
+    <form className="space-y-5 px-4 md:px-16" onSubmit={handleSubmit}>
       <div>
         <label className="block mb-1">Nom</label>
         <input 
@@ -288,7 +288,7 @@ const PrestataireForm = () => {
 
   const renderStep1 = () => (
     <>
-      <div className="space-y-4">
+      <div className="space-y-5 px-4 md:px-16">
         <div>
           <label className="block mb-1">Profil du prestataire</label>
           <div className="flex flex-col items-center space-y-4">
@@ -339,7 +339,7 @@ const PrestataireForm = () => {
   const renderStep2 = () => (
 
     <>
-      <div className="space-y-4">
+      <div className="space-y-5 px-4 md:px-16">
         <div>
           <label className="block mb-1">Spécialité</label>
           <Select
@@ -391,7 +391,7 @@ const PrestataireForm = () => {
 
   const renderStep3 = () => (
     <>
-      <div className="space-y-4">
+      <div className="space-y-5 px-4 md:px-16">
         <div>
           <label className="block mb-1">Email professionnel</label>
           <input

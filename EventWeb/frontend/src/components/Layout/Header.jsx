@@ -66,6 +66,30 @@ const Header = () => {
         setShowDropdown(false);
     };
 
+    const [query, setQuery] = useState("");
+    const [isDropdownOpen, setDropdownOpen] = useState(false);
+
+    // Simuler des données (événements et prestataires)
+    const evenements = [
+        { id: 1, name: "Concert de Jazz", type: "Événement" },
+        { id: 2, name: "Festival du Livre", type: "Événement" },
+    ];
+
+    const prestataires = [
+        { id: 3, name: "DJ Alex", type: "Prestataire" },
+        { id: 4, name: "Traiteur Gourmet", type: "Prestataire" },
+    ];
+
+    // Fusionner les résultats et filtrer
+    const results = [...evenements, ...prestataires].filter(item =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+    );
+
+    const handleInputChange = (e) => {
+        setQuery(e.target.value);
+        setDropdownOpen(e.target.value.length > 0); // Ouvrir le dropdown si l'input n'est pas vide
+    };
+
     return (
         <div className="w-full shadow-md">
             <div className="hidden lg:block bg-gray-800 py-4 px-8">
@@ -80,8 +104,24 @@ const Header = () => {
                             type="search" 
                             placeholder="Chercher un événement ou un prestataire..." 
                             className="px-4 py-2 w-full rounded-full pl-10 focus:outline-none"
+                            value={query}
+                            onChange={handleInputChange}
+                            onBlur={() => setTimeout(() => setDropdownOpen(false), 200)} 
                         />
                         <Search className="absolute left-3 top-2.5 text-gray-400 h-5 w-5" />
+                        {isDropdownOpen && results.length > 0 && (
+                            <div className="absolute w-full bg-white shadow-md rounded-md mt-2 py-2 max-h-60 overflow-y-auto border">
+                                {results.map((item) => (
+                                    <div
+                                        key={item.id}
+                                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex justify-between"
+                                    >
+                                        <span>{item.name}</span>
+                                        <span className="text-sm text-gray-500">{item.type}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                     <div className="flex items-center gap-6 text-white">
                         <NavLink to='/'
@@ -329,7 +369,6 @@ const Header = () => {
                 </div>
             </div> */}
             
-            {/* Menu mobile déroulant */}
             {mobileMenuOpen && (
                 <div 
                     className="fixed inset-0 z-50 flex lg:hidden"

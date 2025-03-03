@@ -11,11 +11,17 @@ const useAuthStore = create(
       isAuthenticated: false,
       isLoading: false,
       error: null,
-      
+
       login: async (credentials) => {
         set({ isLoading: true, error: null });
+
         try {
           const response = await UserService.login(credentials);
+
+          if (!response.token) {
+            throw new Error("Identifiants incorrects !");
+          }
+
           set({ 
             token: response.token,
             nom: response.nom,
@@ -23,33 +29,37 @@ const useAuthStore = create(
             isAuthenticated: true,
             isLoading: false
           });
+
           return response;
         } catch (error) {
+          console.error("Erreur de connexion:", error);
+          
           set({ 
             error: error.message || "Erreur lors de la connexion", 
-            isLoading: false 
+            isLoading: false,
+            isAuthenticated: false
           });
+
           throw error;
         }
       },
-      
+
       logout: () => {
         set({ 
           token: null, 
           nom: null, 
           type: null, 
-          isAuthenticated: false 
+          isAuthenticated: false,
+          isLoading: false,
+          error: null
         });
       },
-      
-      checkAuth: () => {
-        const { token } = get();
-        return !!token;
-      }
+
+      checkAuth: () => !!get().token
     }),
     {
       name: 'auth-storage',
-      getStorage: () => localStorage,
+      getStorage: () => sessionStorage,
     }
   )
 );

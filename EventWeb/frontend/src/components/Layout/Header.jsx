@@ -92,6 +92,7 @@ const Header = () => {
 
     return (
         <div className="w-full shadow-md">
+            {/* Desktop Navigation */}
             <div className="hidden lg:block bg-gray-800 py-4 px-8">
                 <div className="flex items-center justify-between">
                     <div className="text-white text-2xl font-bold">
@@ -258,7 +259,8 @@ const Header = () => {
                 </div>
             </div>
 
-            {/* <div className="flex items-center justify-between py-2 px-4 bg-gray-800 lg:hidden">
+            {/* Mobile Navigation Header */}
+            <div className="flex items-center justify-between py-2 px-4 bg-gray-800 lg:hidden">
                 <div className="flex items-center gap-4">
                     <button 
                         className="text-white"
@@ -279,7 +281,7 @@ const Header = () => {
                     </button>
                     
                     <div className="relative" ref={dropdownRef}>
-                    <button 
+                        <button 
                             className="text-white transition-colors flex items-center gap-1 w-16 h-10 border-2 rounded-full px-1"
                             onClick={() => setShowDropdown(!showDropdown)}
                         >
@@ -367,8 +369,9 @@ const Header = () => {
                         )}
                     </div>
                 </div>
-            </div> */}
+            </div>
             
+            {/* Mobile Menu Sidebar */}
             {mobileMenuOpen && (
                 <div 
                     className="fixed inset-0 z-50 flex lg:hidden"

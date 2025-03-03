@@ -487,6 +487,7 @@ const PrestataireForm = () => {
 const Register = () => {
   const [selected, setSelected] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [error, setError] = useState("");
 
   const options = [
     { value: 'Organisateur', label: 'Organisateur' },
@@ -496,8 +497,9 @@ const Register = () => {
   const handleContinue = () => {
     if (selected) {
       setShowForm(true);
+      setError("");
     } else {
-      toast.error("Veuillez sélectionner un profil");
+      setError("Veuillez sélectionner un profil");
     }
   };
 
@@ -527,16 +529,19 @@ const Register = () => {
           </div>
 
           <div className="space-y-3 px-16">
-            <Select 
-              options={options} 
-              onChange={(option) => {
-                setSelected(option);
-                setShowForm(false);
-              }}
-              placeholder="Sélectionnez votre profil"
-              className="mb-5 z-20"
-              value={selected}
-            />
+            <div className="relative">
+              <Select
+                options={options}
+                onChange={(option) => {
+                  setSelected(option);
+                  setShowForm(false);
+                }}
+                placeholder="Sélectionnez votre profil"
+                className={`mb-2   z-20 ${error ? 'border-red-500' : ''}`}
+                value={selected}
+              />
+              {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+            </div>
             {!showForm && (
               <button
                 onClick={handleContinue}

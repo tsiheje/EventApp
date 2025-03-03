@@ -218,7 +218,7 @@ const Header = () => {
                 </div>
             </div>
 
-            <div className="flex items-center justify-between py-2 px-4 bg-gray-800 lg:hidden">
+            {/* <div className="flex items-center justify-between py-2 px-4 bg-gray-800 lg:hidden">
                 <div className="flex items-center gap-4">
                     <button 
                         className="text-white"
@@ -327,7 +327,7 @@ const Header = () => {
                         )}
                     </div>
                 </div>
-            </div>
+            </div> */}
             
             {/* Menu mobile déroulant */}
             {mobileMenuOpen && (

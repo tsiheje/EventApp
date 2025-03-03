@@ -512,9 +512,9 @@ const Register = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen">
       <div className="flex w-full">
-        <div className="w-1/2 p-8">
+        <div className="w-full lg:w-1/2 p-8">
           <div className="mb-6">
             <Link to='/' className="inline-flex items-center text-gray-600 hover:text-gray-800">
               <ArrowLeft className="w-6 h-6 mr-2"/>
@@ -554,12 +554,14 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/2 bg-blue-50 flex items-center justify-center">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold mb-4">Bienvenue!</h2>
-            <p className="text-gray-600">Nous sommes ravis de vous accueillir sur notre plateforme.</p>
-          </div>
-        </div>
+        <div className="hidden lg:flex w-1/2 bg-blue-50 items-center justify-center">
+                <div className="text-center">
+                    <h2 className="text-3xl font-bold mb-4">Bienvenue!</h2>
+                    <p className="text-gray-600">
+                        Créez, gérez et profitez de vos événements en toute simplicité ! Notre plateforme facilite l'organisation, la vente de billets et l'expérience des participants.
+                    </p>
+                </div>
+            </div>
       </div>
     </div>
   );

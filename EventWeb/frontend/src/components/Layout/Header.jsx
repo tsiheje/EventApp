@@ -6,7 +6,7 @@ import useAuthStore from "../../store";
 import Swal from 'sweetalert2';
 
 const Header = () => {
-    const {nom, type, isAuthenticated, logout } = useAuthStore();
+    const { nom, type, isAuthenticated, logout } = useAuthStore();
     const [showDropdown, setShowDropdown] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [userInitial, setUserInitial] = useState("");
@@ -40,18 +40,34 @@ const Header = () => {
     }, []);
 
     const handleLogout = () => {
-        logout();
-        toast.success("Déconnexion réussie");
-        setShowDropdown(false);
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Voulez-vous vraiment vous déconnecter?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, déconnecter',
+            cancelButtonText: 'Annuler'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logout();
+                toast.success("Déconnexion réussie");
+                setShowDropdown(false);
+            }
+        });
     };
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
     };
 
+    const handleDropdownItemClick = () => {
+        setShowDropdown(false);
+    };
+
     return (
         <div className="w-full shadow-md">
-            {/* Header pour desktop */}
             <div className="hidden lg:block bg-gray-800 py-4 px-8">
                 <div className="flex items-center justify-between">
                     <div className="text-white text-2xl font-bold">
@@ -118,7 +134,7 @@ const Header = () => {
                         >
                             {isAuthenticated ? (
                                 <>
-                                    <div className="w-8 h-7 flex flex-center items-center justify-center rounded-full bg-white">
+                                    <div className="w-8 h-7 flex items-center justify-center rounded-full bg-white">
                                         <p className="text-gray-600">{userInitial}</p>
                                     </div>
                                 </>
@@ -132,41 +148,41 @@ const Header = () => {
                             )}
                         </button>
                         {showDropdown && (
-                            <div className="absolute right-0 top-14 w-64 bg-white shadow-lg z-50 rounded">
+                            <div className="absolute right-0 top-12 w-64 bg-white shadow-lg z-50 rounded">
                                 {isAuthenticated ? (
                                     <>
-                                        <Link to="/profil" className="flex items-center gap-3 p-3 border-b hover:bg-gray-100">
-                                            <div className="w-12 h-12 flex flex-center items-center justify-center rounded-full bg-gray-500">
+                                        <Link to="/profil" className="flex items-center gap-3 p-3 border-b hover:bg-gray-100" onClick={handleDropdownItemClick}>
+                                            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-500">
                                                 <p className="text-white text-2xl">{userInitial}</p>
                                             </div>
                                             <p className="block text-xl text-gray-700">{nom}</p>
                                         </Link>
                                         <div className="flex flex-col p-2 gap-2">
-                                            <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <Link to="/profil" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                 <LayoutDashboard className="h-5 w-5"/>
                                                 Tableau de bord
                                             </Link>
-                                            <Link to="/manage-events" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <Link to="/gerer-evenements" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                 <Calendar className="h-5 w-5"/>
                                                 Gérer les événements
                                             </Link>
                                             {type === "prestataire" && (
-                                                <Link to="/manage-services" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                                <Link to="/gerer-services" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                     <Briefcase className="h-5 w-5"/>
                                                     Gérer les services
                                                 </Link>
                                             )}
-                                            <Link to="/manage-tickets" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <Link to="/gerer-billets" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                 <Ticket className="h-5 w-5" />
                                                 Gérer les billets
                                             </Link>
-                                            <Link to="/settings" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <Link to="/parametres" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                 <Settings className="h-5 w-5" />
                                                 Paramètres du compte
                                             </Link>
                                             <button 
                                                 onClick={handleLogout}
-                                                className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                                                className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
                                             >
                                                 <LogOut className="h-5 w-5" />
                                                 Se déconnecter
@@ -178,7 +194,8 @@ const Header = () => {
                                         <Link 
                                             to="/register"
                                             state={{from: location.pathname}}
-                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded flex items-center gap-2"
+                                            className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded flex items-center gap-2"
+                                            onClick={handleDropdownItemClick}
                                         >
                                             <UserPlus className="w-5 h-5" />
                                             Créer un compte
@@ -187,7 +204,8 @@ const Header = () => {
                                         <Link 
                                             to="/login"
                                             state={{from: location.pathname}}
-                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded flex items-center gap-2"
+                                            className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded flex items-center gap-2"
+                                            onClick={handleDropdownItemClick}
                                         >
                                             <LogIn className="w-5 h-5" />
                                             Se connecter
@@ -200,78 +218,82 @@ const Header = () => {
                 </div>
             </div>
 
-            {/* Header pour mobile et tablette - basé sur l'image */}
-            <div className="flex items-center justify-between py-2 px-4 bg-white lg:hidden">
-                <button 
-                    className="text-gray-700"
-                    onClick={toggleMobileMenu}
-                >
-                    <Menu className="h-6 w-6" />
-                </button>
-                
-                <div className="text-indigo-600 text-xl font-bold">
-                    <Link to='/' className="transition-colors">
-                        EventApp
-                    </Link>
+            <div className="flex items-center justify-between py-2 px-4 bg-gray-800 lg:hidden">
+                <div className="flex items-center gap-4">
+                    <button 
+                        className="text-white"
+                        onClick={toggleMobileMenu}
+                    >
+                        <Menu className="h-6 w-6" />
+                    </button>
+                    
+                    <div className="text-white text-xl font-bold">
+                        <Link to='/' className="transition-colors">
+                            EventApp
+                        </Link>
+                    </div>
                 </div>
-                
                 <div className="flex items-center gap-3">
-                    <button className="p-1 text-gray-700">
+                    <button className="p-1 text-white">
                         <Search className="h-5 w-5" />
                     </button>
                     
                     <div className="relative" ref={dropdownRef}>
-                        <button 
-                            className="flex items-center justify-center"
+                    <button 
+                            className="text-white transition-colors flex items-center gap-1 w-16 h-10 border-2 rounded-full px-1"
                             onClick={() => setShowDropdown(!showDropdown)}
                         >
                             {isAuthenticated ? (
-                                <div className="w-8 h-8 flex items-center justify-center rounded-full bg-purple-700 text-white">
-                                    <p>{userInitial}</p>
-                                </div>
+                                <>
+                                    <div className="w-8 h-7 flex items-center justify-center rounded-full bg-white">
+                                        <p className="text-gray-600">{userInitial}</p>
+                                    </div>
+                                </>
                             ) : (
-                                <div className="w-8 h-8 flex items-center justify-center rounded-full bg-purple-700 text-white">
-                                    <p>MR</p>
-                                </div>
+                                <User className="h-6 w-6 border-2 rounded-full bg-white text-gray-500" />
+                            )}
+                            {showDropdown ? (
+                                <ChevronUp className="h-7 w-7"/>
+                            ) : (
+                                <ChevronDown className="h-7 w-7"/>
                             )}
                         </button>
-                        
                         {showDropdown && (
                             <div className="absolute right-0 top-12 w-64 bg-white shadow-lg z-50 rounded">
                                 {isAuthenticated ? (
                                     <>
-                                        <Link to="/profil" className="flex items-center gap-3 p-3 border-b hover:bg-gray-100">
-                                            <div className="w-12 h-12 flex flex-center items-center justify-center rounded-full bg-gray-500">
+                                        <Link to="/profil" className="flex items-center gap-3 p-3 border-b hover:bg-gray-100" onClick={handleDropdownItemClick}>
+                                            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-500">
                                                 <p className="text-white text-2xl">{userInitial}</p>
                                             </div>
                                             <p className="block text-xl text-gray-700">{nom}</p>
                                         </Link>
                                         <div className="flex flex-col p-2 gap-2">
-                                            <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <Link to="/profil" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                 <LayoutDashboard className="h-5 w-5"/>
                                                 Tableau de bord
                                             </Link>
-                                            <Link to="/manage-events" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <Link to="/gerer-evenements" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                 <Calendar className="h-5 w-5"/>
                                                 Gérer les événements
                                             </Link>
                                             {type === "prestataire" && (
-                                                <Link to="/manage-services" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                                <Link to="/gerer-services" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                     <Briefcase className="h-5 w-5"/>
                                                     Gérer les services
                                                 </Link>
                                             )}
-                                            <Link to="/manage-tickets" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <Link to="/gerer-billets" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                 <Ticket className="h-5 w-5" />
                                                 Gérer les billets
                                             </Link>
-                                            <Link to="/settings" className="block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                                            <Link to="/parametres" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                 <Settings className="h-5 w-5" />
                                                 Paramètres du compte
                                             </Link>
                                             <button 
                                                 onClick={handleLogout}
-                                                className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                                                className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
                                             >
                                                 <LogOut className="h-5 w-5" />
                                                 Se déconnecter
@@ -283,7 +305,8 @@ const Header = () => {
                                         <Link 
                                             to="/register"
                                             state={{from: location.pathname}}
-                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded flex items-center gap-2"
+                                            className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded flex items-center gap-2"
+                                            onClick={handleDropdownItemClick}
                                         >
                                             <UserPlus className="w-5 h-5" />
                                             Créer un compte
@@ -292,7 +315,8 @@ const Header = () => {
                                         <Link 
                                             to="/login"
                                             state={{from: location.pathname}}
-                                            className="block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded flex items-center gap-2"
+                                            className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded flex items-center gap-2"
+                                            onClick={handleDropdownItemClick}
                                         >
                                             <LogIn className="w-5 h-5" />
                                             Se connecter
@@ -382,8 +406,6 @@ const Header = () => {
                             </NavLink>
                         </div>
                     </div>
-                    
-                    {/* Arrière-plan semi-transparent */}
                     <div 
                         className="flex-1 bg-black bg-opacity-50"
                         onClick={toggleMobileMenu}

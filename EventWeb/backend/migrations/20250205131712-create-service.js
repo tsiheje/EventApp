@@ -12,8 +12,14 @@ module.exports = {
       nom: {
         type: Sequelize.STRING
       },
+      service:{
+        type: Sequelize.STRING
+      },
       description: {
         type: Sequelize.STRING
+      },
+      tarif:{
+        type: Sequelize.INTEGER
       },
       prestataireId: {
         type: Sequelize.INTEGER

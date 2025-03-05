@@ -13,7 +13,6 @@ on:
       - mickaelioDev
 
 jobs:
-  # Job pour tester et construire le frontend React
   frontend:
     runs-on: ubuntu-latest
     steps:
@@ -32,14 +31,13 @@ jobs:
           cd Eventweb/frontend
           npm run build
       - name: Deploy React app (Optional)
-        if: github.ref == 'refs/heads/main'  # Déployer uniquement sur la branche main
+        if: github.ref == 'refs/heads/main'
         run: |
           echo "Déployer l'application React sur Netlify/Vercel/Autre"
 
-  # Job pour tester et déployer le backend Node.js
   backend:
     runs-on: ubuntu-latest
-    needs: frontend  # Ce job dépend du job 'frontend' pour garantir que les tests frontend passent
+    needs: frontend 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -59,6 +57,6 @@ jobs:
         run: |
           echo "Migrer la base de données MySQL"
       - name: Deploy Node.js app (Optional)
-        if: github.ref == 'refs/heads/main'  # Déployer uniquement sur la branche main
+        if: github.ref == 'refs/heads/main'
         run: |
           echo "Déployer l'application Node.js sur Heroku/AWS/Autre"

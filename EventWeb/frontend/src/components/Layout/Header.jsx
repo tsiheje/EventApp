@@ -69,7 +69,6 @@ const Header = () => {
     const [query, setQuery] = useState("");
     const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-    // Simuler des données (événements et prestataires)
     const evenements = [
         { id: 1, name: "Concert de Jazz", type: "Événement" },
         { id: 2, name: "Festival du Livre", type: "Événement" },
@@ -79,20 +78,17 @@ const Header = () => {
         { id: 3, name: "DJ Alex", type: "Prestataire" },
         { id: 4, name: "Traiteur Gourmet", type: "Prestataire" },
     ];
-
-    // Fusionner les résultats et filtrer
     const results = [...evenements, ...prestataires].filter(item =>
         item.name.toLowerCase().includes(query.toLowerCase())
     );
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
-        setDropdownOpen(e.target.value.length > 0); // Ouvrir le dropdown si l'input n'est pas vide
+        setDropdownOpen(e.target.value.length > 0); 
     };
 
     return (
         <div className="w-full shadow-md">
-            {/* Desktop Navigation */}
             <div className="hidden lg:block bg-gray-800 py-4 px-8">
                 <div className="flex items-center justify-between">
                     <div className="text-white text-2xl font-bold">
@@ -258,8 +254,6 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Mobile Navigation Header */}
             <div className="flex items-center justify-between py-2 px-4 bg-gray-800 lg:hidden">
                 <div className="flex items-center gap-4">
                     <button 
@@ -280,7 +274,7 @@ const Header = () => {
                         <Search className="h-5 w-5" />
                     </button>
                     
-                    <div className="relative" ref={dropdownRef}>
+                    <div className="relative">
                         <button 
                             className="text-white transition-colors flex items-center gap-1 w-16 h-10 border-2 rounded-full px-1"
                             onClick={() => setShowDropdown(!showDropdown)}
@@ -370,8 +364,6 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            
-            {/* Mobile Menu Sidebar */}
             {mobileMenuOpen && (
                 <div 
                     className="fixed inset-0 z-50 flex lg:hidden"

@@ -83,9 +83,9 @@ const OrganisateurForm = () => {
   };
 
   return (
-    <form className="space-y-5 px-4 md:px-16" onSubmit={handleSubmit}>
+    <form className="space-y-3" onSubmit={handleSubmit}>
       <div>
-        <label className="block mb-1">Nom</label>
+        <label className="block">Nom</label>
         <input 
           type="text"
           name="nom"
@@ -97,7 +97,7 @@ const OrganisateurForm = () => {
         {errors.nom && <p className="text-red-500 text-sm">{errors.nom}</p>}
       </div>  
       <div>
-        <label className="block mb-1">Email</label>
+        <label className="block">Email</label>
         <input 
           type="email" 
           name="email"
@@ -109,7 +109,7 @@ const OrganisateurForm = () => {
         {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
       </div>
       <div>
-        <label className="block mb-1">Téléphone</label>
+        <label className="block">Téléphone</label>
         <input 
           type="text" 
           name="telephone"
@@ -121,7 +121,7 @@ const OrganisateurForm = () => {
         {errors.telephone && <p className="text-red-500 text-sm">{errors.telephone}</p>}
       </div>
       <div className="relative">
-        <label className="block mb-1">Mot de passe</label>
+        <label className="block">Mot de passe</label>
         <div className="relative">
           <input 
             type={showPassword ? "text" : "password"}
@@ -288,7 +288,7 @@ const PrestataireForm = () => {
 
   const renderStep1 = () => (
     <>
-      <div className="space-y-5 px-4 md:px-16">
+      <div className="space-y-5">
         <div>
           <label className="block mb-1">Profil du prestataire</label>
           <div className="flex flex-col items-center space-y-4">
@@ -301,7 +301,6 @@ const PrestataireForm = () => {
               ) : (
                 <div className="text-gray-400 text-center">
                   <p>Cliquez ici pour ajouter une photo</p>
-                  <p className="text-sm mt-1">ou glissez une image</p>
                 </div>
               )}
             </label>
@@ -339,7 +338,7 @@ const PrestataireForm = () => {
   const renderStep2 = () => (
 
     <>
-      <div className="space-y-5 px-4 md:px-16">
+      <div className="space-y-5">
         <div>
           <label className="block mb-1">Spécialité</label>
           <Select
@@ -367,7 +366,7 @@ const PrestataireForm = () => {
         <div className="relative">
           <label className="block mb-1">Tarif</label>
           <input
-            type="text"
+            type="number"
             name="tarifhoraire"
             value={formData.tarifhoraire}
             onChange={handleChange}
@@ -391,7 +390,7 @@ const PrestataireForm = () => {
 
   const renderStep3 = () => (
     <>
-      <div className="space-y-5 px-4 md:px-16">
+      <div className="space-y-5">
         <div>
           <label className="block mb-1">Email professionnel</label>
           <input
@@ -516,6 +515,14 @@ const Register = () => {
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
       <div className="flex w-full">
+        <div className="hidden lg:flex w-1/2 bg-blue-50 items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold mb-4">Bienvenue!</h2>
+            <p className="text-gray-600">
+              Créez, gérez et profitez de vos événements en toute simplicité ! Notre plateforme facilite l'organisation, la vente de billets et l'expérience des participants.
+            </p>
+          </div>
+        </div>
         <div className="w-full lg:w-1/2 p-8">
           <div className="mb-6">
             <Link to='/' className="inline-flex items-center text-gray-600 hover:text-gray-800">
@@ -523,11 +530,9 @@ const Register = () => {
               Retour
             </Link>
           </div>
-          
           <div className="text-center mb-8">
             <h1 className="text-5xl font-bold mb-6">Créer un compte</h1>
           </div>
-
           <div className="space-y-3 px-16">
             <div className="relative">
               <Select
@@ -559,14 +564,6 @@ const Register = () => {
             </div>
           </div>
         </div>
-        <div className="hidden lg:flex w-1/2 bg-blue-50 items-center justify-center">
-                <div className="text-center">
-                    <h2 className="text-3xl font-bold mb-4">Bienvenue!</h2>
-                    <p className="text-gray-600">
-                        Créez, gérez et profitez de vos événements en toute simplicité ! Notre plateforme facilite l'organisation, la vente de billets et l'expérience des participants.
-                    </p>
-                </div>
-            </div>
       </div>
     </div>
   );

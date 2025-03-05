@@ -6,7 +6,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import MotDePasse from './pages/Home/Landing';
+import MotDePasse from './pages/Setting/MotDePasse';
 
 function App() {
   return (

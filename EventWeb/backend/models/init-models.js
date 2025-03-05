@@ -1,25 +1,28 @@
 const { DataTypes } = require("sequelize");
+const sequelize = require("../config/sequelize");
 
 const UtilisateurModel = require("./utilisateur");
 const OrganisateurModel = require("./organisateur");
-const PrestataireModel = require("./prestataire")
+const PrestataireModel = require("./prestataire");
+const ServiceModel = require("./service");
 
-const sequelize = require("../config/sequelize");
-
-const utilisateurs = UtilisateurModel(sequelize, DataTypes);
-const organisateur = OrganisateurModel(sequelize, DataTypes);
-const prestataire = PrestataireModel(sequelize, DataTypes);
+const Utilisateur = UtilisateurModel(sequelize, DataTypes);
+const Organisateur = OrganisateurModel(sequelize, DataTypes);
+const Prestataire = PrestataireModel(sequelize, DataTypes);
+const Service = ServiceModel(sequelize, DataTypes);
 
 const db = {
-  utilisateurs,
-  organisateur,
-  prestataire,
+  Utilisateur,   
+  Organisateur, 
+  Prestataire,  
+  Service,
 };
 
 Object.keys(db).forEach((modelName) => {
-    if (db[modelName].associate) {
-      db[modelName].associate(db);
-    }
-  });
-  
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
+db.sequelize = sequelize;
 module.exports = db;

@@ -10,15 +10,25 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // dreefine association he
+      Prestataire.belongsTo(models.Utilisateur, {
+        foreignKey: 'userId',
+        targetKey:'id',
+        as: 'Utilisateur',
+        onDelete: 'CASCADE',
+      });
     }
   }
   Prestataire.init({
-    userId: DataTypes.INTEGER,
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: { model: 'Utilisateurs', key: 'id' },
+    },
     specialite: DataTypes.STRING,
     tarifhoraire: DataTypes.FLOAT,
     localisation: DataTypes.STRING,
-    disponipibilite: DataTypes.STRING,
+    disponibilite: DataTypes.STRING,
     profil: DataTypes.STRING
   }, {
     sequelize,

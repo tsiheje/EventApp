@@ -21,7 +21,7 @@ module.exports = {
       localisation: {
         type: Sequelize.STRING
       },
-      disponipibilite: {
+      disponibilite: {
         type: Sequelize.STRING
       },
       profil: {

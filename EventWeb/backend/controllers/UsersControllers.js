@@ -29,7 +29,7 @@ const UserController = {
                 });
             }
 
-            const existingUser = await db.utilisateurs.findOne({
+            const existingUser = await db.Utilisateur.findOne({
                 where: { email }
             });
 
@@ -41,7 +41,7 @@ const UserController = {
 
             const hashedPassword = await bcrypt.hash(motDePasse, 10);
 
-            const user = await db.utilisateurs.create({
+            const user = await db.Utilisateur.create({
                 nom,
                 email,
                 telephone,
@@ -59,7 +59,7 @@ const UserController = {
                         });
                     }
 
-                    await db.prestataire.create({
+                    await db.Prestataire.create({
                         userId: user.id,
                         specialite,
                         tarifhoraire,
@@ -70,7 +70,7 @@ const UserController = {
                     break;
 
                 case 'Organisateur':
-                    await db.organisateur.create({
+                    await db.Organisateur.create({
                         userId: user.id,
                     });
                     break;
@@ -95,12 +95,12 @@ const UserController = {
             };
 
             if (type === 'Prestataire') {
-                const prestataire = await db.prestataire.findOne({
+                const prestataire = await db.Prestataire.findOne({
                     where: { userId: user.id }
                 });
                 userResponse.prestataire = prestataire;
             } else if (type === 'Organisateur') {
-                const organisateur = await db.organisateur.findOne({
+                const organisateur = await db.Organisateur.findOne({
                     where: { userId: user.id }
                 });
                 userResponse.organisateur = organisateur;
@@ -126,7 +126,7 @@ const UserController = {
                 });
             }
 
-            const user = await db.utilisateurs.findOne({
+            const user = await db.Utilisateur.findOne({
                 where: { email }
             });
 
@@ -163,12 +163,12 @@ const UserController = {
             };
 
             if (user.type === 'Prestataire') {
-                const prestataire = await db.prestataire.findOne({
+                const prestataire = await db.Prestataire.findOne({
                     where: { userId: user.id }
                 });
                 userResponse.prestataire = prestataire;
             } else if (user.type === 'Organisateur') {
-                const organisateur = await db.organisateur.findOne({
+                const organisateur = await db.Organisateur.findOne({
                     where: { userId: user.id }
                 });
                 userResponse.organisateur = organisateur;
@@ -194,7 +194,7 @@ const UserController = {
                 });
             }
 
-            const user = await db.utilisateurs.findByPk(userId);
+            const user = await db.Utilisateur.findByPk(userId);
             
             if (!user) {
                 return res.status(404).json({
@@ -205,7 +205,7 @@ const UserController = {
             const profilePath = req.file.path;
             
             if (user.type === 'Prestataire') {
-                const prestataire = await db.prestataire.findOne({
+                const prestataire = await db.Prestataire.findOne({
                     where: { userId }
                 });
                 
@@ -213,7 +213,7 @@ const UserController = {
                     await prestataire.update({ profil: profilePath });
                 }
             } else if (user.type === 'Organisateur') {
-                const organisateur = await db.organisateur.findOne({
+                const organisateur = await db.Organisateur.findOne({
                     where: { userId }
                 });
                 

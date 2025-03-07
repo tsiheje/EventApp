@@ -93,7 +93,7 @@ const Header = () => {
                 <div className="flex items-center justify-between">
                     <div className="text-white text-2xl font-bold">
                         <Link to='/' className="hover:text-gray-300 transition-colors">
-                            EventApp
+                            TikeHetsika
                         </Link>
                     </div>
                     <div className="relative mx-4 flex-grow max-w-md">
@@ -185,7 +185,7 @@ const Header = () => {
                             )}
                         </button>
                         {showDropdown && (
-                            <div className="absolute right-0 top-12 w-64 bg-white shadow-lg z-50 rounded">
+                            <div className="absolute right-0 top-14 w-64 bg-white shadow-lg z-50 rounded">
                                 {isAuthenticated ? (
                                     <>
                                         <Link to="/profil" className="flex items-center gap-3 p-3 border-b hover:bg-gray-100" onClick={handleDropdownItemClick}>
@@ -203,7 +203,7 @@ const Header = () => {
                                                 <Calendar className="h-5 w-5"/>
                                                 Gérer les événements
                                             </Link>
-                                            {type === "prestataire" && (
+                                            {type === "Prestataire" && (
                                                 <Link to="/gerer-services" className="cursor-pointer block px-4 py-2 text-gray-700 hover:bg-gray-100 flex items-center gap-2" onClick={handleDropdownItemClick}>
                                                     <Briefcase className="h-5 w-5"/>
                                                     Gérer les services
@@ -265,7 +265,7 @@ const Header = () => {
                     
                     <div className="text-white text-xl font-bold">
                         <Link to='/' className="transition-colors">
-                            EventApp
+                            TikeHetsika
                         </Link>
                     </div>
                 </div>
@@ -371,7 +371,7 @@ const Header = () => {
                 >
                     <div className="w-64 bg-white h-full shadow-lg">
                         <div className="flex justify-between items-center p-4 border-b">
-                            <div className="text-xl font-bold text-gray-800">EventApp</div>
+                            <div className="text-xl font-bold text-gray-800">TikeHetsika</div>
                             <button onClick={toggleMobileMenu}>
                                 <X className="h-6 w-6 text-gray-700" />
                             </button>

@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import UserService from './services/api/UserService'
+import PrestataireService from './services/api/PrestataireService';
 
 const useAuthStore = create(
   persist(
@@ -11,6 +12,10 @@ const useAuthStore = create(
       isAuthenticated: false,
       isLoading: false,
       error: null,
+
+      prestataires: [],
+      isLoadingPrestataire:null,
+      errorPrestataire:null,
 
       login: async (credentials) => {
         set({ isLoading: true, error: null });
@@ -53,6 +58,24 @@ const useAuthStore = create(
           isLoading: false,
           error: null
         });
+      },
+
+      getPrestataire: async () => {
+        set({isLoadingPrestataire: true, errorPrestataire: null})
+        try {
+          const response = await PrestataireService.getAllPrestataire();
+          set({
+            prestataires:response,
+            isLoadingPrestataire: false,
+          })
+          return response
+        } catch (error) {
+          console.error("Erreur de recuperation des prestataire:", error);
+          set({
+            errorPrestataire: "Imposible de charger les prestataires",
+            isLoadingPrestataire: false,
+          })
+        }
       },
 
       checkAuth: () => !!get().token

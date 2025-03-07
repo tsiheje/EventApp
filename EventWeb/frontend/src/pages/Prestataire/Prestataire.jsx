@@ -7,7 +7,7 @@ const Prestataire = () => {
 
     useEffect(()=>{
         getPrestataire()
-    },[]);
+    },[getPrestataire]);
 
     console.log(prestataires)
     return (

@@ -47,11 +47,11 @@ jobs:
           node-version: '16'
       - name: Install dependencies (Backend)
         run: |
-          cd Eventweb/backend
+          cd EventWeb/backend
           npm install
       - name: Run tests (Backend)
         run: |
-          cd Eventweb/backend
+          cd EventWeb/backend
           npm test
       - name: Migrate MySQL database (Optional)
         run: |

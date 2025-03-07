@@ -24,11 +24,11 @@ jobs:
           node-version: '16'
       - name: Install dependencies (Frontend)
         run: |
-          cd Eventweb/frontend
+          cd EventWeb/frontend
           npm install
       - name: Build React app
         run: |
-          cd Eventweb/frontend
+          cd EventWeb/frontend
           npm run build
       - name: Deploy React app (Optional)
         if: github.ref == 'refs/heads/main'

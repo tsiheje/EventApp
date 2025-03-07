@@ -52,6 +52,8 @@ jobs:
       - name: Run tests (Backend)
         run: |
           cd EventWeb/backend
+          npm install -g jest
+          chmod +x node_modules/.bin/jest
           npm test
       - name: Migrate MySQL database (Optional)
         run: |

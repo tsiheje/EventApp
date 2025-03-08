@@ -5,7 +5,7 @@ const Footer = () => {
                 <p>Evenement</p>
             </div>
             <div className="flex items-center justify-center bg-gray-800">
-                <p className="text-sm mb-2 text-white p-5">
+                <p className="text-sm text-white p-8">
                     copyright &copy; {new Date().getFullYear()} <a href="https://marie-mickaelio.vercel.app" target="blank">par Mickaelio</a>. tous droit réserver!
                 </p>
             </div>

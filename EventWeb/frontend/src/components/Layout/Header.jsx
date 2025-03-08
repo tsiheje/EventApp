@@ -89,7 +89,7 @@ const Header = () => {
 
     return (
         <div className="w-full shadow-md">
-            <div className="hidden lg:block bg-gray-800 py-4 px-8">
+            <div className="hidden lg:block bg-gray-800 py-4 px-8 fixed w-full z-10">
                 <div className="flex items-center justify-between">
                     <div className="text-white text-2xl font-bold">
                         <Link to='/' className="hover:text-gray-300 transition-colors">
@@ -254,7 +254,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-            <div className="flex items-center justify-between py-2 px-4 bg-gray-800 lg:hidden">
+            <div className="flex items-center justify-between py-2 px-4 bg-gray-800 lg:hidden fixed w-full z-10">
                 <div className="flex items-center gap-4">
                     <button 
                         className="text-white"

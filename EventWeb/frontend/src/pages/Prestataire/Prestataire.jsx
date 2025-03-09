@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Search, ListFilter, Star, MapPin, Phone, Mail, Briefcase, Tag, ChevronRight } from "lucide-react";
+import { Search, ListFilter, Star, MapPin, Phone, Mail, Tag, ChevronRight } from "lucide-react";
 import useAuthStore from "../../store";
 
 const Prestataire = () => {

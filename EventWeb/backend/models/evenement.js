@@ -15,12 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Evenement.init({
     nom: DataTypes.STRING,
+    evenement: DataTypes.STRING,
     description: DataTypes.STRING,
     date: DataTypes.DATE,
     lieu: DataTypes.STRING,
     capaciteMax: DataTypes.INTEGER,
     prix: DataTypes.FLOAT,
     status: DataTypes.STRING,
+    // prestataireId: DataTypes.
     organisateurId: DataTypes.INTEGER
   }, {
     sequelize,

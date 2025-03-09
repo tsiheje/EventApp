@@ -51,7 +51,7 @@ const Prestataire = () => {
                                     {prestataire.profil ? (
                                         <img 
                                             src={`http://localhost:3004/${prestataire.profil}`} 
-                                            alt={`Photo de ${prestataire.Utilisateur.nom}`} 
+                                            alt={`${prestataire.Utilisateur.nom}`} 
                                             className="w-full h-full object-cover"
                                         />
                                     ) : (

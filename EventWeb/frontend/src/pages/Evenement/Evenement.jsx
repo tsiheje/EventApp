@@ -17,27 +17,29 @@ const Evenement = () => {
     }
 
     return (
-        <div className="px-8 py-5 flex flex-col gap-5">
-            <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                    <div className="relative mx-4 flex-grow max-w-md">
-                        <input 
-                            type="search" 
-                            placeholder="chercher un événement..." 
-                            className="px-4 py-2 w-full border rounded-full pl-10 focus:outline-none"
-                        />
-                        <Search className="absolute left-3 top-2.5 text-gray-400 h-5 w-5" />
+        <div className="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen py-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                        <div className="relative mx-4 flex-grow max-w-md">
+                            <input 
+                                type="search" 
+                                placeholder="chercher un événement..." 
+                                className="px-4 py-2 w-full border rounded-full pl-10 focus:outline-none"
+                            />
+                            <Search className="absolute left-3 top-2.5 text-gray-400 h-5 w-5" />
+                        </div>
+                        <div>
+                            <Filter/>
+                        </div>
                     </div>
                     <div>
-                        <Filter/>
+                        <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700" onClick={Organiser}>Organiser un evenement</button>
                     </div>
                 </div>
-                <div>
-                    <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700" onClick={Organiser}>Organiser un evenement</button>
+                <div className="flex items-center justify-center">
+                    Liste des evenements
                 </div>
-            </div>
-            <div className="flex items-center justify-center">
-                Liste des evenements
             </div>
         </div>
     );

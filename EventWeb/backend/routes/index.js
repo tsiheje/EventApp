@@ -19,5 +19,7 @@ router.post("/addService", ServiceController.create);
 
 //router evenement
 router.get("/getAllEvenement", EvenementController.getAll);
+router.post("/addEvenement", EvenementController.create);
+
 
 module.exports = router;

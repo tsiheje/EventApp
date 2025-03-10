@@ -33,7 +33,7 @@ jobs:
       - name: Deploy React app (Optional)
         if: github.ref == 'refs/heads/main'
         run: |
-          echo "Déployer l'application React sur Netlify/Vercel/Autre"
+          echo "Déployer l'application React sur Vercel"
 
   backend:
     runs-on: ubuntu-latest

@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Evenement.belongsTo(models.Organisateur, {
+        foreignKey: 'organisateurId',
+        as: 'organisateur'
+      });
     }
   }
   Evenement.init({
@@ -22,8 +25,17 @@ module.exports = (sequelize, DataTypes) => {
     capaciteMax: DataTypes.INTEGER,
     prix: DataTypes.FLOAT,
     status: DataTypes.STRING,
-    // prestataireId: DataTypes.
-    organisateurId: DataTypes.INTEGER
+    organisateurId: DataTypes.INTEGER,
+    serviceId: {
+      type: DataTypes.JSON,
+      allowNull: true,
+      defaultValue: []
+    },
+    prestataireId: {
+      type: DataTypes.JSON, 
+      allowNull: true,
+      defaultValue: []
+    }
   }, {
     sequelize,
     modelName: 'Evenement',

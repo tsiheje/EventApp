@@ -36,6 +36,16 @@ module.exports = {
       organisateurId: {
         type: Sequelize.INTEGER
       },
+      serviceId: {
+        type: DataTypes.JSON,
+        allowNull: true,
+        defaultValue: []
+      },
+      prestataireId: {
+        type: DataTypes.JSON, 
+        allowNull: true,
+        defaultValue: []
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

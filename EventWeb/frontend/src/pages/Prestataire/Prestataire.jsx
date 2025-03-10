@@ -18,7 +18,8 @@ const Prestataire = () => {
             let filtered = prestataires.filter(prestataire => 
                 prestataire.Utilisateur.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 prestataire.specialite.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                prestataire.localisation.toLowerCase().includes(searchTerm.toLowerCase())
+                prestataire.localisation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                prestataire.tarifhoraire.toLocaleString().includes(searchTerm.toLocaleString())
             );
             
             if (selectedSpeciality) {

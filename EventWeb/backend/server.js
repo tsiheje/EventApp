@@ -16,6 +16,15 @@ app.use('/api', routes);
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-server.listen(port, '0.0.0.0', () => {
-    console.log(`Server started on port ${port}`);
-});
+if (require.main === module) {
+    const port = process.env.PORT || 3004;
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`Server started on port ${port}`);
+    });
+  } else {
+    // Exporter l'application Express pour qu'elle fonctionne sur Vercel
+    module.exports = (req, res) => {
+      app(req, res); // Gérer les requêtes et réponses avec Express
+    };
+  }
+

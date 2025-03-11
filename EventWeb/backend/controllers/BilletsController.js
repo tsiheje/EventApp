@@ -22,10 +22,13 @@ const BilletController = {
                 where: { evenementId: evenementId }
             }) || 0;
             
-            if (billetsVendus + parseInt(NbBillets) > evenement.capaciteMax) {
+            const nbBilletsInt = parseInt(NbBillets);
+            const capaciteRestante = evenement.capaciteMax - billetsVendus;
+            
+            if (billetsVendus + nbBilletsInt > evenement.capaciteMax) {
                 return res.status(400).json({
                     error: "Capacité maximale de l'événement dépassée",
-                    capaciteRestante: evenement.capaciteMax - billetsVendus
+                    capaciteRestante: capaciteRestante
                 });
             }
             
@@ -33,7 +36,7 @@ const BilletController = {
             
             const nouveauBillet = await db.Billet.create({
                 type,
-                NbBillets,
+                NbBillets: nbBilletsInt,
                 numeroBillet, 
                 dateAchat: new Date(), 
                 totalprix,
@@ -43,10 +46,14 @@ const BilletController = {
                 participantNumero: participantNumero || null
             });
             
+            await evenement.update({
+                capaciteMax: capaciteRestante - nbBilletsInt
+            });
+            
             res.status(201).json({
                 message: "Billet créé avec succès",
                 billet: nouveauBillet,
-                capaciteRestante: evenement.capaciteMax - (billetsVendus + parseInt(NbBillets))
+                capaciteRestante: capaciteRestante - nbBilletsInt
             });
             
         } catch (error) {

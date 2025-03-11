@@ -14,12 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Billet.init({
+    numeroBillet: DataTypes.INTEGER,
     type: DataTypes.STRING,
     dateAchat: DataTypes.DATE,
     type: DataTypes.STRING,
     prix: DataTypes.FLOAT,
     participantId: DataTypes.INTEGER,
-    organisateurId: DataTypes.INTEGER
+    evenementId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Billet',

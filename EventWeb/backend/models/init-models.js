@@ -6,12 +6,16 @@ const OrganisateurModel = require("./organisateur");
 const PrestataireModel = require("./prestataire");
 const ServiceModel = require("./service");
 const EvenementModel = require("./evenement");
+const EvaluationModel = require("./evaluation");
+const BilletModel = require("./billet");
 
 const Utilisateur = UtilisateurModel(sequelize, DataTypes);
 const Organisateur = OrganisateurModel(sequelize, DataTypes);
 const Prestataire = PrestataireModel(sequelize, DataTypes);
 const Service = ServiceModel(sequelize, DataTypes);
 const Evenement = EvenementModel(sequelize, DataTypes);
+const Evaluation = EvaluationModel(sequelize, DataTypes);
+const Billet = BilletModel(sequelize, DataTypes);
 
 const db = {
   Utilisateur,   
@@ -19,6 +23,8 @@ const db = {
   Prestataire,  
   Service,
   Evenement,
+  Evaluation,
+  Billet,
 };
 
 Object.keys(db).forEach((modelName) => {

@@ -15,10 +15,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Billet.init({
     numeroBillet: DataTypes.INTEGER,
+    NbBillets: DataTypes.INTEGER,
     type: DataTypes.STRING,
     dateAchat: DataTypes.DATE,
     type: DataTypes.STRING,
-    prix: DataTypes.FLOAT,
+    totalprix: DataTypes.FLOAT,
     participantId: DataTypes.INTEGER,
     evenementId: DataTypes.INTEGER
   }, {

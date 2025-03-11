@@ -18,10 +18,13 @@ module.exports = {
       dateAchat: {
         type: Sequelize.DATE
       },
+      NbBillets: {
+        type: Sequelize.INTEGER
+      },
       type: {
         type: Sequelize.STRING
       },
-      prix: {
+      totalprix: {
         type: Sequelize.FLOAT
       },
       participantId: {

@@ -74,7 +74,7 @@ const Login = () => {
                                 type="email"
                                 name="email"
                                 value={formData.email}
-                                className={`w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.email ? "border-red-500" : "border-gray-300"}`}
+                                className={`w-full p-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.email ? "border-red-500" : "border-gray-300"}`}
                                 placeholder="Entrez votre email"
                                 onChange={handleChange}
                                 autoComplete="off"
@@ -89,7 +89,7 @@ const Login = () => {
                                     type={showPassword ? "text" : "password"}
                                     name="motDePasse"
                                     value={formData.motDePasse}
-                                    className={`w-full p-2 pr-10 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.motDePasse ? "border-red-500" : "border-gray-300"}`}
+                                    className={`w-full p-2 pr-10 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 ${errors.motDePasse ? "border-red-500" : "border-gray-300"}`}
                                     placeholder="Entrez votre mot de passe"
                                     onChange={handleChange}
                                     autoComplete="off"

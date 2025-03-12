@@ -4,7 +4,7 @@ import useAuthStore from "../../store";
 const Service = () => {
     const {type} = useAuthStore()
     return (
-        <div className="px-8 py-5 flex flex-col gap-5">
+        <div className="min-h-screen py-20">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
                     <div className="relative mx-4 flex-grow max-w-md">

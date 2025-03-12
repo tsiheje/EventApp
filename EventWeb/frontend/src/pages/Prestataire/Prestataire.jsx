@@ -33,17 +33,17 @@ const Prestataire = () => {
     const specialities = prestataires ? [...new Set(prestataires.map(p => p.specialite))] : [];
 
     return (
-        <div className="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen py-10">
+        <div className="min-h-screen py-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="text-center mb-4">
-                    <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl mb-2">
+                    <h1 className="text-3xl font-extrabold text-indigo-900 sm:text-4xl mb-2">
                         Nos Prestataires Experts
                     </h1>
-                    <p className="max-w-2xl mx-auto text-gray-500">
+                    <p className="max-w-2xl mx-auto text-indigo-700">
                         Découvrez nos professionnels qualifiés prêts à vous aider
                     </p>
                 </div>
-                <div className="rounded-2xl p-6 mb-4">
+                <div className="sticky top-20 left-0 rounded-2xl mb-4 p-4 bg-white z-10 ">
                     <div className="flex flex-col md:flex-row gap-4 items-center">
                         <div className="relative flex-grow">
                             <input 

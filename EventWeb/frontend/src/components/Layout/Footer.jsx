@@ -3,26 +3,41 @@ import { Facebook,Mail, FileText, ShieldCheck, Info, PhoneCall } from "lucide-re
 const Footer = () => {
     return (
         <footer className="flex flex-col bg-gray-800 text-white">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 px-20 py-6">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-64 px-20 py-10">
                 <div>
                     TikeHetsika
                 </div>
-                <div className="flex flex-col gap-5">
-                    <a href="/about" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
-                        <Info size={16} /> À propos
-                    </a>
-                    <a href="/terms" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
-                        <FileText size={16} /> Conditions d'utilisation
-                    </a>
-                    <a href="/privacy" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
-                        <ShieldCheck size={16} /> Politique de confidentialité
-                    </a>
-                    <a href="/contacts" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
-                        <Mail size={16} /> Contact-nous
-                    </a>
+                <div className="flex items-center gap-16">
+                    <div className="flex flex-col gap-5">
+                        <a href="/about" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
+                            <Info size={16} /> Evenements
+                        </a>
+                        <a href="/terms" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
+                            <FileText size={16} /> Prestataires
+                        </a>
+                        <a href="/privacy" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
+                            <ShieldCheck size={16} /> Services
+                        </a>
+                        <a href="/contacts" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
+                            <Mail size={16} /> Billets
+                        </a>
+                    </div>
+                    <div className="flex flex-col gap-5">
+                        <a href="/about" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
+                            <Info size={16} /> À propos
+                        </a>
+                        <a href="/terms" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
+                            <FileText size={16} /> Conditions d'utilisation
+                        </a>
+                        <a href="/privacy" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
+                            <ShieldCheck size={16} /> Politique de confidentialité
+                        </a>
+                        <a href="/contacts" className="flex items-center gap-2 text-sm hover:text-gray-300 transition">
+                            <Mail size={16} /> Contact-nous
+                        </a>
+                    </div>
                 </div>
                 <div className="flex flex-col justify-center gap-6 py-4">
-                    <p className="text-2xl">Contact</p>
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="flex gap-2 hover:text-gray-400 transition">
                         <Facebook size={20} /> TikeHetsika
                     </a>

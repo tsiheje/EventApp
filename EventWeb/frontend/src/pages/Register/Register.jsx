@@ -90,7 +90,7 @@ const OrganisateurForm = () => {
           type="text"
           name="nom"
           value={formData.nom}
-          className={`w-full p-2 border rounded ${errors.nom ? "border-red-500" : "border-gray-300"}`}
+          className={`w-full p-2 border rounded-xl ${errors.nom ? "border-red-500" : "border-gray-300"}`}
           placeholder="Entrez votre nom"
           onChange={handleChange}
         />
@@ -102,7 +102,7 @@ const OrganisateurForm = () => {
           type="email" 
           name="email"
           value={formData.email}
-          className={`w-full p-2 border rounded ${errors.email ? "border-red-500" : "border-gray-300"}`}
+          className={`w-full p-2 border rounded-xl ${errors.email ? "border-red-500" : "border-gray-300"}`}
           placeholder="Entrez votre email"
           onChange={handleChange}
         />
@@ -114,7 +114,7 @@ const OrganisateurForm = () => {
           type="text" 
           name="telephone"
           value={formData.telephone}
-          className={`w-full p-2 border rounded ${errors.telephone ? "border-red-500" : "border-gray-300"}`}
+          className={`w-full p-2 border rounded-xl ${errors.telephone ? "border-red-500" : "border-gray-300"}`}
           placeholder="Entrez votre téléphone"
           onChange={handleChange}
         />
@@ -127,7 +127,7 @@ const OrganisateurForm = () => {
             type={showPassword ? "text" : "password"}
             name="motDePasse"
             value={formData.motDePasse}
-            className={`w-full p-2 pr-10 border rounded ${errors.motDePasse ? "border-red-500" : "border-gray-300"}`}
+            className={`w-full p-2 pr-10 border rounded-xl ${errors.motDePasse ? "border-red-500" : "border-gray-300"}`}
             placeholder="Créez un mot de passe"
             onChange={handleChange}
           />
@@ -144,7 +144,7 @@ const OrganisateurForm = () => {
       </div>
       <button 
         type="submit" 
-        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
+        className="w-full bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-600 disabled:bg-gray-400"
         disabled={isLoading}
       >
         {isLoading ? "Inscription en cours..." : "S'inscrire comme Organisateur"}
@@ -320,14 +320,14 @@ const PrestataireForm = () => {
             name="nom"
             value={formData.nom}
             onChange={handleChange}
-            className={`w-full p-2 border rounded ${errors.nom ? "border-red-500" : "border-gray-300"}`}
+            className={`w-full p-2 border rounded-xl ${errors.nom ? "border-red-500" : "border-gray-300"}`}
             placeholder="Votre nom complet"
           />
           {errors.nom && <p className="text-red-500 text-sm">{errors.nom}</p>}
         </div>
         <button 
           onClick={nextStep} 
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          className="w-full bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-600"
         >
           Suivant
         </button>
@@ -358,7 +358,7 @@ const PrestataireForm = () => {
             name="localisation"
             value={formData.localisation}
             onChange={handleChange}
-            className={`w-full p-2 border rounded ${errors.localisation ? "border-red-500" : "border-gray-300"}`}
+            className={`w-full p-2 border rounded-xl ${errors.localisation ? "border-red-500" : "border-gray-300"}`}
             placeholder="Votre localisation"
           />
           {errors.localisation && <p className="text-red-500 text-sm">{errors.localisation}</p>}
@@ -370,17 +370,17 @@ const PrestataireForm = () => {
             name="tarifhoraire"
             value={formData.tarifhoraire}
             onChange={handleChange}
-            className={`w-full p-2 pr-10 border rounded ${errors.tarifhoraire ? "border-red-500" : "border-gray-300"}`}
+            className={`w-full p-2 pr-10 border rounded-xl ${errors.tarifhoraire ? "border-red-500" : "border-gray-300"}`}
             placeholder="Votre tarif"
           />
           <span className="absolute right-3 top-9 text-gray-500">Ar</span>
           {errors.tarifhoraire && <p className="text-red-500 text-sm">{errors.tarifhoraire}</p>}
         </div>
         <div className="flex space-x-4">
-          <button onClick={previousStep} className="w-1/2 bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
+          <button onClick={previousStep} className="w-1/2 bg-gray-500 text-white p-2 rounded-xl hover:bg-gray-600">
             Précédent
           </button>
-          <button onClick={nextStep} className="w-1/2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+          <button onClick={nextStep} className="w-1/2 bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-600">
             Suivant
           </button>
         </div>
@@ -398,7 +398,7 @@ const PrestataireForm = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full p-2 border rounded ${errors.email ? "border-red-500" : "border-gray-300"}`}
+            className={`w-full p-2 border rounded-xl ${errors.email ? "border-red-500" : "border-gray-300"}`}
             placeholder="Email professionnel"
           />
           {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
@@ -411,7 +411,7 @@ const PrestataireForm = () => {
             value={formData.telephone}
             onChange={handleChange}
             maxLength={10}
-            className={`w-full p-2 border rounded ${errors.telephone ? "border-red-500" : "border-gray-300"}`}
+            className={`w-full p-2 border rounded-xl ${errors.telephone ? "border-red-500" : "border-gray-300"}`}
             placeholder="Numéro de téléphone"
           />
           {errors.telephone && <p className="text-red-500 text-sm">{errors.telephone}</p>}
@@ -424,7 +424,7 @@ const PrestataireForm = () => {
               name="motDePasse"
               value={formData.motDePasse}
               onChange={handleChange}
-              className={`w-full p-2 pr-10 border rounded ${errors.motDePasse ? "border-red-500" : "border-gray-300"}`}
+              className={`w-full p-2 pr-10 border rounded-xl ${errors.motDePasse ? "border-red-500" : "border-gray-300"}`}
               placeholder="Créez un mot de passe"
             />
             <button
@@ -439,12 +439,12 @@ const PrestataireForm = () => {
           {errors.motDePasse && <p className="text-red-500 text-sm">{errors.motDePasse}</p>}
         </div>
         <div className="flex space-x-4">
-          <button onClick={previousStep} className="w-1/2 bg-gray-500 text-white p-2 rounded hover:bg-gray-600">
+          <button onClick={previousStep} className="w-1/2 bg-gray-500 text-white p-2 rounded-xl hover:bg-gray-600">
             Précédent
           </button>
           <button 
             onClick={handleSubmit} 
-            className="w-1/2 bg-green-500 text-white p-2 rounded hover:bg-green-600 disabled:bg-gray-400"
+            className="w-1/2 bg-green-500 text-white p-2 rounded-xl hover:bg-green-600 disabled:bg-gray-400"
             disabled={isLoading}
           >
             {isLoading ? "Inscription en cours..." : "S'inscrire"}
@@ -542,7 +542,7 @@ const Register = () => {
                   setShowForm(false);
                 }}
                 placeholder="Sélectionnez votre profil"
-                className={`mb-2   z-20 ${error ? 'border-red-500' : ''}`}
+                className={`mb-2 rounded-xl-xl z-20 ${error ? 'border-red-500' : ''}`}
                 value={selected}
               />
               {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
@@ -550,7 +550,7 @@ const Register = () => {
             {!showForm && (
               <button
                 onClick={handleContinue}
-                className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+                className="w-full bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-600"
                 type="button"
               >
                 Continuer
